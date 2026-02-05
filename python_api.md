@@ -2,6 +2,12 @@
 
 这个仓库新增了 `pybind11` 封装模块：`shape_based_matching_py`，可直接在 Python 中调用 C++ 的模板训练与匹配流程。
 
+## 0. 依赖
+
+- CMake
+- Python 3
+- OpenCV 开发包（需要提供 `OpenCVConfig.cmake`，例如系统安装的 `libopencv-dev`）
+
 ## 1. 构建
 
 在仓库根目录执行：
