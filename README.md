@@ -104,3 +104,6 @@ Well, issues are not clearly classified and many questions are discussed in one 
 [failure case?](https://github.com/meiqua/shape_based_matching/issues/19#issuecomment-481153907)  
 [how to run even faster?](https://github.com/meiqua/shape_based_matching/issues/21#issuecomment-489664586)  
 
+## Python bindings
+
+Python 调用版本与示例见：[python_api.md](python_api.md)。
