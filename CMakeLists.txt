@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 set (CMAKE_CXX_STANDARD 14)
 project(shape_based_matching)
+option(BUILD_PYTHON "Build Python bindings" ON)
 
 
 # debug or release
@@ -27,7 +28,7 @@ SET(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # opencv
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /opt/ros/kinetic)
-find_package(OpenCV 3 REQUIRED)
+find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 
@@ -39,3 +40,15 @@ include_directories (${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/MIPP/")
 add_executable(${PROJECT_NAME}_test line2Dup.cpp test.cpp)
 target_link_libraries(${PROJECT_NAME}_test ${OpenCV_LIBS})
 
+if(BUILD_PYTHON)
+    include(FetchContent)
+    FetchContent_Declare(
+        pybind11
+        GIT_REPOSITORY https://github.com/pybind/pybind11.git
+        GIT_TAG v2.13.6
+    )
+    FetchContent_MakeAvailable(pybind11)
+
+    pybind11_add_module(shape_based_matching_py python_bindings.cpp line2Dup.cpp)
+    target_link_libraries(shape_based_matching_py PRIVATE ${OpenCV_LIBS})
+endif()
